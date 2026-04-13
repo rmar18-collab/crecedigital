@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>creceDigital — Alianza por la Autonomía Digital Infantil en ALC</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ── Paleta azul libertad y confianza ── */
+    --b1: #001F4D;   /* navy profundo — fondo base */
+    --b2: #003580;   /* azul marino oscuro */
+    --b3: #1257B5;   /* azul institucional principal */
+    --b4: #2E80D8;   /* azul medio vibrante */
+    --b5: #5AAAF5;   /* azul cielo */
+    --b6: #9DCEFF;   /* azul suave */
+    --b7: #D6EEFF;   /* azul muy claro */
+
+    /* Acento cálido — naranja del logo, uso puntual */
+    --gold: #EF9F27;
+    --gold-bg: #FAEEDA;
+
+    /* UI semánticos */
+    --ink:        var(--b1);
+    --ink-soft:   #031428;
+    --ink-mid:    #05213f;
+    --border:     rgba(94,170,245,0.12);
+    --border-mid: rgba(94,170,245,0.22);
+    --text-light: var(--b6);
+    --text-mid:   #4a7aaa;
+    --white:      #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ink);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─────────────────────────────── TOPBAR */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 48px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0,21,50,0.97);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+  }
+
+  .logo-svg-wrap { cursor: pointer; display: flex; align-items: center; }
+  .logo-svg-wrap svg { height: 72px; width: auto; }
+
+  .topbar-pills { display: flex; gap: 8px; }
+
+  .pill {
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid var(--border-mid);
+    color: var(--b6);
+    background: rgba(46,128,216,0.06);
+    transition: all 0.2s;
+  }
+  .pill:hover { background: rgba(46,128,216,0.14); color: var(--white); }
+
+  /* ─────────────────────────────── HERO */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 5% 20%, rgba(18,87,181,0.28) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 50% at 92% 85%, rgba(46,128,216,0.16) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 35% at 45% 5%,  rgba(90,170,245,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-body {
+    padding: 68px 48px 52px;
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center; gap: 8px;
+    border: 1px solid var(--border-mid);
+    background: rgba(46,128,216,0.08);
+    border-radius: 100px;
+    padding: 5px 16px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--b5);
+    margin-bottom: 24px;
+  }
+
+  .eyebrow-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.4; transform:scale(0.75); }
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    margin-bottom: 20px;
+  }
+
+  .ht-glow {
+    color: var(--b5);
+    text-shadow: 0 0 40px rgba(90,170,245,0.35);
+  }
+
+  .ht-gold { color: var(--gold); }
+
+  .ht-small {
+    display: block;
+    font-size: 0.38em;
+    font-weight: 400;
+    color: var(--b6);
+    letter-spacing: 0.02em;
+    margin-top: 12px;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.7;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--b6);
+    line-height: 1.75;
+    margin-bottom: 36px;
+    max-width: 560px;
+  }
+
+  .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--b3);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600; font-size: 13.5px;
+    border: none; cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 18px rgba(18,87,181,0.4);
+  }
+  .btn-primary:hover {
+    background: var(--b4);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(46,128,216,0.45);
+  }
+
+  .btn-ghost {
+    background: rgba(90,170,245,0.07);
+    color: var(--b5);
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 500; font-size: 13.5px;
+    border: 1px solid var(--border-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { background: rgba(90,170,245,0.14); color: var(--white); }
+
+  .hero-logo-display {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-logo-display svg {
+    width: 100%; max-width: 290px; height: auto;
+    filter: drop-shadow(0 12px 48px rgba(18,87,181,0.35));
+  }
+
+  /* ─────────────────────────────── STATS */
+  .hero-stats {
+    display: flex;
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 2;
+  }
+
+  .hero-stat {
+    flex: 1;
+    padding: 20px 24px;
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .hero-stat:last-child { border-right: none; }
+
+  .hero-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 22px;
+  }
+
+  .hs-1 { border-top: 2px solid var(--b3); }  .hs-1 .hero-stat-num { color: var(--b4); }
+  .hs-2 { border-top: 2px solid var(--b4); }  .hs-2 .hero-stat-num { color: var(--b5); }
+  .hs-3 { border-top: 2px solid var(--b5); }  .hs-3 .hero-stat-num { color: var(--b6); }
+  .hs-4 { border-top: 2px solid var(--gold); } .hs-4 .hero-stat-num { color: var(--gold); }
+  .hs-5 { border-top: 2px solid var(--b6); }  .hs-5 .hero-stat-num { color: var(--b5); }
+
+  .hero-stat-label {
+    font-size: 10px;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ─────────────────────────────── NAV */
+  .nav-strip {
+    background: rgba(3,20,40,0.98);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 84px;
+    z-index: 100;
+  }
+  .nav-strip::-webkit-scrollbar { display: none; }
+
+  .nav-tab {
+    padding: 16px 20px;
+    font-size: 13px; font-weight: 500;
+    color: var(--text-mid);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    background: none;
+    border-top: none; border-left: none; border-right: none;
+  }
+  .nav-tab:hover { color: var(--b5); }
+  .nav-tab.active { color: var(--b5); border-bottom-color: var(--b4); }
+
+  /* ─────────────────────────────── SECTIONS */
+  .section {
+    display: none;
+    padding: 60px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+    animation: fadeIn 0.35s ease;
+  }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity:0; transform:translateY(10px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--b4);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(26px, 4vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+
+  .section-lead {
+    font-size: 15.5px;
+    font-weight: 300;
+    color: var(--b6);
+    line-height: 1.75;
+    max-width: 680px;
+    margin-bottom: 44px;
+  }
+
+  /* ─────────────────────────────── CARDS */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--ink-soft);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: all 0.25s;
+  }
+  .card:hover {
+    border-color: var(--border-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.35);
+  }
+
+  .card-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 14.5px;
+    margin-bottom: 8px;
+  }
+  .card-body { font-size: 13px; color: var(--b6); line-height: 1.65; }
+
+  .ic-b3 { background: rgba(18,87,181,0.15); }
+  .ic-b4 { background: rgba(46,128,216,0.15); }
+  .ic-b5 { background: rgba(90,170,245,0.12); }
+  .ic-gold { background: rgba(239,159,39,0.12); }
+
+  /* ─────────────────────────────── MANIFESTO */
+  .manifesto-block {
+    background: linear-gradient(135deg, var(--ink-mid) 0%, rgba(18,87,181,0.12) 100%);
+    border-left: 4px solid var(--b4);
+    border-radius: 0 18px 18px 0;
+    padding: 40px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .manifesto-block::before {
+    content: '"';
+    position: absolute;
+    top: -30px; left: 24px;
+    font-size: 160px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    color: rgba(46,128,216,0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .manifesto-text {
+    font-size: 17.5px; font-weight: 300;
+    line-height: 1.85;
+    color: var(--white);
+    font-style: italic;
+    max-width: 760px;
+    position: relative;
+  }
+
+  .manifesto-text strong {
+    font-weight: 600;
+    color: var(--b5);
+    font-style: normal;
+  }
+
+  /* ─────────────────────────────── FEAR CULTURE BLOCK */
+  .fear-block {
+    background: linear-gradient(135deg, rgba(1,31,77,0.8) 0%, rgba(18,87,181,0.08) 100%);
+    border: 1px solid var(--border-mid);
+    border-top: 3px solid var(--gold);
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fear-block::after {
+    content: '!';
+    position: absolute;
+    right: 32px; top: 16px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 120px;
+    color: rgba(239,159,39,0.05);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .fear-block-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .fear-block-text {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--b6);
+    line-height: 1.8;
+    max-width: 720px;
+    margin-bottom: 24px;
+  }
+
+  .fear-block-text strong {
+    font-weight: 600;
+    color: var(--b5);
+  }
+
+  .fear-sources {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .fear-source {
+    background: rgba(0,21,50,0.6);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .fear-source-icon { font-size: 22px; }
+
+  .fear-source-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--white);
+  }
+
+  .fear-source-body {
+    font-size: 12px;
+    color: var(--b6);
+    line-height: 1.6;
+  }
+
+  /* ─────────────────────────────── PILLARS */
+  .pillars-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 44px;
+  }
+
+  .pillar-cell {
+    background: var(--ink-soft);
+    padding: 24px 20px;
+    display: flex; flex-direction: column; gap: 7px;
+    border-top: 3px solid var(--b3);
+    transition: all 0.2s;
+  }
+  .pillar-cell:hover { background: var(--ink-mid); }
+  .pillar-cell:nth-child(2) { border-top-color: var(--b4); }
+  .pillar-cell:nth-child(3) { border-top-color: var(--b5); }
+  .pillar-cell:nth-child(4) { border-top-color: var(--b3); }
+  .pillar-cell:nth-child(5) { border-top-color: var(--b4); }
+  .pillar-cell:nth-child(6) { border-top-color: var(--gold); }
+  .pillar-cell:nth-child(7) { border-top-color: var(--b5); }
+
+  .pillar-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-mid); letter-spacing:0.1em; }
+  .pillar-title { font-family:'Syne',sans-serif; font-weight:700; font-size:14px; color:var(--white); }
+  .pillar-body { font-size:12.5px; color:var(--b6); line-height:1.6; }
+
+  /* ─────────────────────────────── CONTRAST */
+  .contrast-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-bottom: 40px;
+  }
+
+  .contrast-no {
+    background: rgba(18,87,181,0.04);
+    border: 1px solid rgba(90,170,245,0.15);
+    border-left: 3px solid var(--gold);
+    border-radius: 14px; padding: 24px;
+  }
+
+  .contrast-yes {
+    background: rgba(18,87,181,0.07);
+    border: 1px solid var(--border-mid);
+    border-left: 3px solid var(--b4);
+    border-radius: 14px; padding: 24px;
+  }
+
+  .contrast-label {
+    font-family:'Syne',sans-serif; font-weight:700; font-size:12.5px;
+    margin-bottom:14px; text-transform:uppercase; letter-spacing:0.05em;
+  }
+  .contrast-no  .contrast-label { color: var(--gold); }
+  .contrast-yes .contrast-label { color: var(--b5); }
+
+  .contrast-list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .contrast-list li { font-size:13px; color:var(--b6); line-height:1.55; padding-left:16px; position:relative; }
+  .contrast-no  .contrast-list li::before { content:'×'; position:absolute; left:0; color:var(--gold); font-weight:700; }
+  .contrast-yes .contrast-list li::before { content:'✓'; position:absolute; left:0; color:var(--b5); font-weight:700; }
+
+  /* ─────────────────────────────── TIERS */
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 14px; margin-bottom: 44px;
+  }
+
+  .tier-card {
+    border-radius: 14px; padding: 24px 18px;
+    border: 1px solid var(--border);
+    background: var(--ink-soft);
+    display: flex; flex-direction: column; gap: 10px;
+    transition: all 0.25s;
+    border-top: 3px solid transparent;
+  }
+  .tier-card:hover { transform:translateY(-3px); box-shadow:0 14px 36px rgba(0,0,0,0.4); border-color: var(--border-mid); }
+
+  .tier-1 { border-top-color: var(--gold); }
+  .tier-2 { border-top-color: var(--b3); }
+  .tier-3 { border-top-color: var(--b4); }
+  .tier-4 { border-top-color: var(--b5); }
+
+  .tier-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 100px;
+    font-size: 10px; font-weight:600; letter-spacing:0.1em;
+    text-transform: uppercase; width: fit-content;
+  }
+  .badge-founding  { background:rgba(239,159,39,0.12);  color:var(--gold);  border:1px solid rgba(239,159,39,0.3); }
+  .badge-full      { background:rgba(18,87,181,0.15);   color:var(--b5);    border:1px solid rgba(18,87,181,0.35); }
+  .badge-associate { background:rgba(46,128,216,0.12);  color:var(--b4);    border:1px solid rgba(46,128,216,0.3); }
+  .badge-observer  { background:rgba(90,170,245,0.08);  color:var(--b6);    border:1px solid rgba(90,170,245,0.2); }
+
+  .tier-name { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; }
+  .tier-desc { font-size:12.5px; color:var(--b6); line-height:1.6; flex:1; }
+
+  .tier-benefits {
+    list-style:none; display:flex; flex-direction:column; gap:5px;
+    border-top:1px solid var(--border); padding-top:14px; margin-top:2px;
+  }
+  .tier-benefits li { font-size:11px; color:var(--b6); padding-left:12px; position:relative; }
+  .tier-benefits li::before { content:'›'; position:absolute; left:0; color:var(--b4); font-weight:700; }
+
+  /* ─────────────────────────────── PLATFORM */
+  .platform-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:40px; }
+
+  .platform-card {
+    background: var(--ink-soft);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px;
+    transition: all 0.25s;
+  }
+  .platform-card:hover { border-color: var(--border-mid); box-shadow:0 10px 32px rgba(0,0,0,0.3); }
+
+  .platform-card-header { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+
+  .platform-icon {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: rgba(46,128,216,0.12);
+    border: 1px solid var(--border-mid);
+    display: flex; align-items:center; justify-content:center; font-size:17px;
+  }
+
+  .platform-card-title { font-family:'Syne',sans-serif; font-weight:700; font-size:14px; }
+  .platform-card-body  { font-size:13px; color:var(--b6); line-height:1.7; }
+
+  /* ─────────────────────────────── GOVERNANCE */
+  .gov-flow { display:flex; flex-direction:column; gap:10px; margin-bottom:40px; }
+
+  .gov-row { display:grid; grid-template-columns:160px 1fr; gap:16px; align-items:start; }
+
+  .gov-label {
+    font-family:'DM Mono',monospace; font-size:10px;
+    color:var(--text-mid); text-align:right; padding-top:14px;
+    letter-spacing:0.05em; text-transform:uppercase;
+  }
+
+  .gov-block {
+    background:var(--ink-soft); border:1px solid var(--border);
+    border-left:3px solid transparent; border-radius:12px; padding:14px 18px;
+    transition:all 0.2s;
+  }
+  .gov-block:hover { border-left-color: var(--b4); background: var(--ink-mid); }
+
+  .gov-block-title { font-family:'Syne',sans-serif; font-weight:700; font-size:13.5px; margin-bottom:4px; color:var(--b5); }
+  .gov-block-body  { font-size:12.5px; color:var(--b6); line-height:1.6; }
+
+  /* ─────────────────────────────── ROADMAP */
+  .roadmap-timeline { display:flex; flex-direction:column; padding-left:32px; position:relative; }
+
+  .roadmap-timeline::before {
+    content:''; position:absolute;
+    left:7px; top:6px; bottom:20px; width:2px;
+    background: linear-gradient(to bottom, var(--b3), var(--b4), var(--b5), var(--gold), var(--b6));
+  }
+
+  .timeline-item { position:relative; padding:0 0 36px 28px; }
+
+  .timeline-dot {
+    position:absolute; left:-32px; top:4px;
+    width:16px; height:16px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--b3); z-index:1;
+  }
+
+  .ti-1 .timeline-dot { border-color:var(--b3); }
+  .ti-2 .timeline-dot { border-color:var(--b4); }
+  .ti-3 .timeline-dot { border-color:var(--b5); }
+  .ti-4 .timeline-dot { border-color:var(--gold); }
+  .ti-5 .timeline-dot { border-color:var(--b6); background:rgba(157,206,255,0.15); }
+
+  .timeline-year { font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:0.1em; margin-bottom:5px; }
+  .ti-1 .timeline-year { color:var(--b3); }
+  .ti-2 .timeline-year { color:var(--b4); }
+  .ti-3 .timeline-year { color:var(--b5); }
+  .ti-4 .timeline-year { color:var(--gold); }
+  .ti-5 .timeline-year { color:var(--b6); }
+
+  .timeline-title { font-family:'Syne',sans-serif; font-weight:700; font-size:15px; margin-bottom:7px; }
+  .timeline-body  { font-size:13px; color:var(--b6); line-height:1.65; }
+
+  .timeline-tags  { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+  .timeline-tag   { padding:2px 9px; border-radius:100px; font-size:10px; font-weight:500; background:rgba(46,128,216,0.08); color:var(--b5); border:1px solid var(--border); }
+
+  /* ─────────────────────────────── ECOSYSTEM */
+  .ecosystem-sectors {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px,1fr));
+    gap: 14px; margin-bottom: 40px;
+  }
+
+  .sector-card {
+    background: var(--ink-soft); border: 1px solid var(--border);
+    border-radius: 13px; padding: 20px;
+    border-top: 2px solid var(--b3);
+    transition: all 0.2s;
+  }
+  .sector-card:nth-child(2) { border-top-color:var(--b4); }
+  .sector-card:nth-child(3) { border-top-color:var(--b5); }
+  .sector-card:nth-child(4) { border-top-color:var(--gold); }
+  .sector-card:nth-child(5) { border-top-color:var(--b6); }
+  .sector-card:nth-child(6) { border-top-color:var(--b3); }
+  .sector-card:hover { border-color:var(--border-mid); background:var(--ink-mid); }
+
+  .sector-header { display:flex; align-items:center; gap:9px; margin-bottom:12px; }
+  .sector-emoji  { font-size:19px; }
+  .sector-title  { font-family:'Syne',sans-serif; font-weight:700; font-size:13px; }
+  .sector-orgs   { list-style:none; display:flex; flex-direction:column; gap:4px; }
+  .sector-orgs li { font-size:11.5px; color:var(--b6); padding-left:11px; position:relative; }
+  .sector-orgs li::before { content:'·'; position:absolute; left:0; color:var(--b4); font-weight:700; }
+
+  /* ─────────────────────────────── PULL QUOTE */
+  .pull-quote {
+    border-left: 3px solid var(--b4);
+    padding: 16px 20px; margin: 28px 0;
+    background: rgba(18,87,181,0.06);
+    border-radius: 0 12px 12px 0;
+  }
+  .pull-quote p    { font-size:14px; color:var(--b6); line-height:1.7; font-style:italic; }
+  .pull-quote cite { display:block; margin-top:7px; font-size:11px; color:var(--text-mid); font-style:normal; letter-spacing:0.03em; }
+
+  .pull-quote-gold {
+    border-left-color: var(--gold);
+    background: rgba(239,159,39,0.05);
+  }
+
+  .divider { border:none; border-top:1px solid var(--border); margin:32px 0; }
+
+  /* ─────────────────────────────── FOOTER */
+  .site-footer {
+    background: var(--ink-soft);
+    border-top: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    margin-top: 80px; flex-wrap: wrap; gap: 16px;
+  }
+
+  .footer-logo svg { height: 40px; width: auto; }
+  .footer-text     { font-size: 11.5px; color: var(--text-mid); }
+
+  /* ─────────────────────────────── RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-body { grid-template-columns:1fr; gap:28px; }
+    .hero-logo-display { display:none; }
+    .fear-sources { grid-template-columns:1fr; }
+  }
+  @media (max-width: 768px) {
+    .topbar, .hero-body, .nav-strip, .section, .site-footer { padding-left:20px; padding-right:20px; }
+    .hero-stats { flex-wrap:wrap; }
+    .hero-stat  { min-width:50%; }
+    .pillars-row { grid-template-columns:1fr; }
+    .contrast-box { grid-template-columns:1fr; }
+    .tiers-grid { grid-template-columns:1fr 1fr; }
+    .platform-grid { grid-template-columns:1fr; }
+    .gov-row { grid-template-columns:1fr; }
+    .gov-label { text-align:left; padding-top:0; }
+    .fear-sources { grid-template-columns:1fr; }
+  }
+  @media (max-width: 500px) {
+    .tiers-grid { grid-template-columns:1fr; }
+    .topbar-pills { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── TOPBAR ──────────────────────────────── -->
+<header class="topbar">
+  <div class="logo-svg-wrap" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <!-- Logo creceDigital — versión negativa adaptada para topbar oscuro -->
+    <!-- viewBox recortado al contenido: símbolo + wordmark + tagline -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="25 130 890 255" style="height:72px;width:auto;">
+      <defs>
+        <radialGradient id="lg-nucleo" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#378ADD"/>
+          <stop offset="100%" stop-color="#0C447C"/>
+        </radialGradient>
+      </defs>
+
+      <!-- ── Ondas -->
+      <path d="M30,228 Q148,138 266,228" fill="none" stroke="#B5D4F4" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+      <path d="M52,250 Q148,163 244,250" fill="none" stroke="#85B7EB" stroke-width="2.2" stroke-linecap="round" opacity="0.45"/>
+      <path d="M78,274 Q148,188 218,274" fill="none" stroke="#EF9F27" stroke-width="3"   stroke-linecap="round" opacity="0.65"/>
+      <path d="M106,298 Q148,218 190,298" fill="none" stroke="#B5D4F4" stroke-width="4"  stroke-linecap="round" opacity="0.7"/>
+
+      <!-- ── Núcleo -->
+      <circle cx="148" cy="308" r="40" fill="#0C447C" stroke="#378ADD" stroke-width="1" stroke-opacity="0.5"/>
+      <circle cx="148" cy="308" r="29" fill="url(#lg-nucleo)"/>
+      <circle cx="148" cy="308" r="18" fill="#85B7EB"/>
+      <circle cx="148" cy="308" r="8"  fill="#031428"/>
+      <circle cx="148" cy="300" r="5"  fill="#185FA5"/>
+      <line x1="148" y1="305" x2="148" y2="318" stroke="#185FA5" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="148" y1="310" x2="140" y2="304" stroke="#185FA5" stroke-width="2"   stroke-linecap="round"/>
+      <line x1="148" y1="310" x2="156" y2="304" stroke="#185FA5" stroke-width="2"   stroke-linecap="round"/>
+      <line x1="148" y1="318" x2="141" y2="328" stroke="#185FA5" stroke-width="2"   stroke-linecap="round"/>
+      <line x1="148" y1="318" x2="155" y2="328" stroke="#185FA5" stroke-width="2"   stroke-linecap="round"/>
+
+      <!-- ── Satélites -->
+      <circle cx="108" cy="288" r="12" fill="#EF9F27"/><circle cx="108" cy="288" r="6" fill="#042C53"/>
+      <circle cx="188" cy="288" r="12" fill="#EF9F27"/><circle cx="188" cy="288" r="6" fill="#042C53"/>
+      <circle cx="78"  cy="266" r="10" fill="#378ADD" opacity="0.9"/><circle cx="78"  cy="266" r="4.5" fill="#042C53"/>
+      <circle cx="218" cy="266" r="10" fill="#378ADD" opacity="0.9"/><circle cx="218" cy="266" r="4.5" fill="#042C53"/>
+      <circle cx="52"  cy="244" r="8.5" fill="#85B7EB" opacity="0.85"/><circle cx="52" cy="244" r="4" fill="#042C53"/>
+      <circle cx="244" cy="244" r="8.5" fill="#85B7EB" opacity="0.85"/><circle cx="244" cy="244" r="4" fill="#042C53"/>
+      <line x1="148" y1="308" x2="108" y2="288" stroke="#EF9F27" stroke-width="1.6" opacity="0.65"/>
+      <line x1="148" y1="308" x2="188" y2="288" stroke="#EF9F27" stroke-width="1.6" opacity="0.65"/>
+      <line x1="148" y1="308" x2="78"  y2="266" stroke="#85B7EB" stroke-width="1.3" opacity="0.45"/>
+      <line x1="148" y1="308" x2="218" y2="266" stroke="#85B7EB" stroke-width="1.3" opacity="0.45"/>
+      <line x1="148" y1="308" x2="52"  y2="244" stroke="#B5D4F4" stroke-width="1"   opacity="0.35"/>
+      <line x1="148" y1="308" x2="244" y2="244" stroke="#B5D4F4" stroke-width="1"   opacity="0.35"/>
+
+      <!-- ── Crece escalonado -->
+      <text x="310" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="38" fill="#85B7EB">C</text>
+      <text x="337" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="50" fill="#85B7EB">r</text>
+      <text x="364" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="62" fill="#B5D4F4">e</text>
+      <text x="404" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="74" fill="#B5D4F4">c</text>
+      <text x="451" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="86" fill="white">e</text>
+
+      <!-- ── DIGITAL negativo -->
+      <text x="506" y="333" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="900" font-size="86" fill="#0C447C" opacity="0.6">DIGITAL</text>
+      <text x="505" y="332" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="900" font-size="86" fill="#0C447C" opacity="0.65">DIGITAL</text>
+      <text x="503" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="900" font-size="86" fill="#85B7EB">DIGITAL</text>
+
+      <!-- ── Separador y tagline -->
+      <line x1="310" y1="348" x2="905" y2="348" stroke="#0C447C" stroke-width="0.8"/>
+      <text x="312" y="370" font-family="'Helvetica Neue',Arial,sans-serif" font-size="14" fill="#85B7EB" font-style="italic">Alianza por la Autonomía Digital Infantil en Latinoamérica</text>
+    </svg>
+  </div>
+  <div class="topbar-pills">
+    <button class="pill">Fundación sin ánimo de lucro</button>
+    <button class="pill">ALC · 2025–2030</button>
+    <button class="pill">Multisectorial</button>
+  </div>
+</header>
+
+<!-- ── HERO ──────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="hero-text">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Fundación · Ecosistema digital de ALC
+      </div>
+      <h1 class="hero-title">
+        <span class="ht-glow">Sin restricciones</span><br>
+        <span class="ht-glow">arbitrarias.</span>
+        <span class="ht-gold"> Con acuerdos responsables.</span>
+        <span class="ht-small">
+          Niños sanos e independientes que con un acompañamiento activo y colectivo, accedan progresivamente a un Entorno Digital seguro, fomentando así una autonomía digital.
+        </span>
+      </h1>
+      <p class="hero-sub">
+        Una alianza multisectorial que reúne al ecosistema digital de ALC para impulsar entornos digitales seguros, sanos y libres de restricciones desproporcionadas, basado en el respeto a los Derechos de NNA — desde la educación, la corresponsabilidad equilibrada, el acceso progresivo y la autonomía digital, reemplazando el miedo por capacidades.
+      </p>
+      <div class="hero-cta-row">
+        <button class="btn-primary" onclick="switchTab('manifiesto')">Conoce la alianza</button>
+        <button class="btn-ghost"   onclick="switchTab('miedo')">Contra la cultura del miedo →</button>
+      </div>
+    </div>
+
+    <div class="hero-logo-display">
+      <!-- Logo creceDigital principal — versión sobre fondo oscuro -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="920" height="400" viewBox="0 0 920 400" style="max-width:300px;height:auto;">
+        <defs>
+          <radialGradient id="nucleo" cx="40%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="#B5D4F4"/>
+            <stop offset="100%" stop-color="#185FA5"/>
+          </radialGradient>
+          <linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#0C447C"/>
+            <stop offset="100%" stop-color="#185FA5"/>
+          </linearGradient>
+        </defs>
+        <rect width="920" height="400" fill="none"/>
+        <!-- Ondas -->
+        <path d="M30,228 Q148,138 266,228" fill="none" stroke="#B5D4F4" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+        <path d="M52,250 Q148,163 244,250" fill="none" stroke="#85B7EB" stroke-width="2.2" stroke-linecap="round" opacity="0.6"/>
+        <path d="M78,274 Q148,188 218,274" fill="none" stroke="#EF9F27" stroke-width="3"   stroke-linecap="round" opacity="0.78"/>
+        <path d="M106,298 Q148,218 190,298" fill="none" stroke="#5AAAF5" stroke-width="4"  stroke-linecap="round" opacity="0.9"/>
+        <!-- Núcleo -->
+        <circle cx="148" cy="308" r="40" fill="#0b1827" stroke="#5AAAF5" stroke-width="1.2" stroke-opacity="0.5"/>
+        <circle cx="148" cy="308" r="29" fill="url(#nucleo)"/>
+        <circle cx="148" cy="308" r="18" fill="#B5D4F4"/>
+        <circle cx="148" cy="308" r="8"  fill="#0b1827"/>
+        <circle cx="148" cy="300" r="5"  fill="#185FA5"/>
+        <line x1="148" y1="305" x2="148" y2="318" stroke="#185FA5" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="148" y1="310" x2="140" y2="304" stroke="#185FA5" stroke-width="2"   stroke-linecap="round"/>
+        <line x1="148" y1="310" x2="156" y2="304" stroke="#185FA5" stroke-width="2"   stroke-linecap="round"/>
+        <line x1="148" y1="318" x2="141" y2="328" stroke="#185FA5" stroke-width="2"   stroke-linecap="round"/>
+        <line x1="148" y1="318" x2="155" y2="328" stroke="#185FA5" stroke-width="2"   stroke-linecap="round"/>
+        <!-- Satélites -->
+        <circle cx="108" cy="288" r="12" fill="#EF9F27"/><circle cx="108" cy="288" r="6"  fill="#FAEEDA"/>
+        <circle cx="188" cy="288" r="12" fill="#EF9F27"/><circle cx="188" cy="288" r="6"  fill="#FAEEDA"/>
+        <circle cx="78"  cy="266" r="10" fill="#185FA5" opacity="0.9"/><circle cx="78"  cy="266" r="4.5" fill="#0b1827"/>
+        <circle cx="218" cy="266" r="10" fill="#185FA5" opacity="0.9"/><circle cx="218" cy="266" r="4.5" fill="#0b1827"/>
+        <circle cx="52"  cy="244" r="8.5" fill="#85B7EB" opacity="0.9"/><circle cx="52"  cy="244" r="4"  fill="#0b1827"/>
+        <circle cx="244" cy="244" r="8.5" fill="#85B7EB" opacity="0.9"/><circle cx="244" cy="244" r="4"  fill="#0b1827"/>
+        <line x1="148" y1="308" x2="108" y2="288" stroke="#EF9F27" stroke-width="1.6" opacity="0.7"/>
+        <line x1="148" y1="308" x2="188" y2="288" stroke="#EF9F27" stroke-width="1.6" opacity="0.7"/>
+        <line x1="148" y1="308" x2="78"  y2="266" stroke="#378ADD" stroke-width="1.3" opacity="0.55"/>
+        <line x1="148" y1="308" x2="218" y2="266" stroke="#378ADD" stroke-width="1.3" opacity="0.55"/>
+        <line x1="148" y1="308" x2="52"  y2="244" stroke="#85B7EB" stroke-width="1"   opacity="0.45"/>
+        <line x1="148" y1="308" x2="244" y2="244" stroke="#85B7EB" stroke-width="1"   opacity="0.45"/>
+        <!-- Crece escalonado — letras de tamaño creciente, misma baseline -->
+        <text x="310" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="38" fill="#85B7EB">C</text>
+        <text x="337" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="50" fill="#85B7EB">r</text>
+        <text x="364" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="62" fill="#B5D4F4">e</text>
+        <text x="404" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="74" fill="#B5D4F4">c</text>
+        <text x="451" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="86" fill="white">e</text>
+        <!-- DIGITAL con sombra -->
+        <text x="506" y="333" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="900" font-size="86" fill="#042C53" opacity="0.5">DIGITAL</text>
+        <text x="505" y="332" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="900" font-size="86" fill="#042C53" opacity="0.55">DIGITAL</text>
+        <text x="503" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="900" font-size="86" fill="#85B7EB">DIGITAL</text>
+        <!-- Tagline -->
+        <line x1="310" y1="348" x2="905" y2="348" stroke="#378ADD" stroke-width="0.8" opacity="0.5"/>
+        <text x="312" y="370" font-family="'Helvetica Neue',Arial,sans-serif" font-size="14" fill="#85B7EB" font-style="italic" opacity="0.85">Alianza por la Autonomía Digital Infantil en Latinoamérica</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat hs-1"><div class="hero-stat-num">4+</div><div class="hero-stat-label">Sectores convocados</div></div>
+    <div class="hero-stat hs-2"><div class="hero-stat-num">0%</div><div class="hero-stat-label">Prohibiciones arbitrarias</div></div>
+    <div class="hero-stat hs-3"><div class="hero-stat-num">360°</div><div class="hero-stat-label">Corresponsabilidad</div></div>
+    <div class="hero-stat hs-4"><div class="hero-stat-num">0</div><div class="hero-stat-label">Tolerancia a la cultura del miedo</div></div>
+    <div class="hero-stat hs-5"><div class="hero-stat-num">33</div><div class="hero-stat-label">Países ALC</div></div>
+  </div>
+</section>
+
+<!-- ── NAV ───────────────────────────────────── -->
+<nav class="nav-strip" id="mainNav">
+  <button class="nav-tab active" onclick="switchTab('manifiesto')">Manifiesto</button>
+  <button class="nav-tab"        onclick="switchTab('miedo')">Contra la cultura del miedo</button>
+  <button class="nav-tab"        onclick="switchTab('porque')">¿Por qué la alianza?</button>
+  <button class="nav-tab"        onclick="switchTab('plataformas')">Para las plataformas</button>
+  <button class="nav-tab"        onclick="switchTab('ecosistema')">Ecosistema</button>
+  <button class="nav-tab"        onclick="switchTab('membresia')">Membresía</button>
+  <button class="nav-tab"        onclick="switchTab('gobernanza')">Gobernanza</button>
+  <button class="nav-tab"        onclick="switchTab('hoja')">Hoja de ruta</button>
+</nav>
+
+<!-- ══ 1. MANIFIESTO ══ -->
+<div class="section active" id="tab-manifiesto">
+  <div class="section-eyebrow">01 · Manifiesto</div>
+  <h2 class="section-title">Qué defendemos<br>y qué rechazamos</h2>
+  <p class="section-lead">creceDigital es una fundación sin ánimo de lucro cuyo fundamento central es proteger los derechos de niñas, niños y adolescentes en los entornos digitales — a través de educación, sensibilización, herramientas digitales y acompañamiento, desde la corresponsabilidad compartida de todo el ecosistema digital, y sin restricciones arbitrarias ni campañas de cultura del miedo.</p>
+
+  <div class="manifesto-block">
+    <p class="manifesto-text">creceDigital es una <strong>fundación sin ánimo de lucro</strong> cuyo fundamento central es proteger los derechos de NNA en los entornos digitales. Actuamos a través de <strong>iniciativas de educación, sensibilización y herramientas digitales</strong> que priorizan el acompañamiento digital y la responsabilidad compartida de todo el ecosistema. Creemos que la protección real no viene de muros sino de competencias: familias informadas, educadores preparados, plataformas responsables y autoridades con capacidades efectivas. Rechazamos las <strong>restricciones arbitrarias</strong> al acceso de NNA a internet y las <strong>campañas de cultura del miedo</strong> como instrumento de protección — porque el miedo sin conocimiento no protege, paraliza y excluye.</p>
+  </div>
+
+  <div class="pillars-row">
+    <div class="pillar-cell"><div class="pillar-num">PRINCIPIO 01</div><div class="pillar-title">Autonomía digital progresiva</div><div class="pillar-body">El acceso a internet es un derecho. Su ejercicio se fortalece gradualmente según la edad y el contexto, no mediante prohibiciones absolutas.</div></div>
+    <div class="pillar-cell"><div class="pillar-num">PRINCIPIO 02</div><div class="pillar-title">Corresponsabilidad activa</div><div class="pillar-body">El Estado, las plataformas, las familias, la escuela y la sociedad civil comparten la responsabilidad de garantizar entornos digitales seguros e inclusivos.</div></div>
+    <div class="pillar-cell"><div class="pillar-num">PRINCIPIO 03</div><div class="pillar-title">Educación sobre restricción</div><div class="pillar-body">La educación mediática, el ejemplo adulto y el acompañamiento parental son instrumentos más efectivos y sostenibles que el bloqueo de contenidos.</div></div>
+    <div class="pillar-cell"><div class="pillar-num">PRINCIPIO 04</div><div class="pillar-title">No a la cultura del miedo</div><div class="pillar-body">El miedo infundado surge de la falta de habilidades y educación digital en adultos e instituciones. La respuesta es formación y capacidades — no pánico ni prohibición.</div></div>
+    <div class="pillar-cell"><div class="pillar-num">PRINCIPIO 05</div><div class="pillar-title">Respuesta rápida ante violencia digital</div><div class="pillar-body">Toda denuncia de violencia digital contra NNA o mujeres merece atención oportuna, protocolos claros y coordinación entre plataformas e instituciones.</div></div>
+    <div class="pillar-cell"><div class="pillar-num">PRINCIPIO 06</div><div class="pillar-title">Verificación, no discriminación</div><div class="pillar-body">Apoyamos mecanismos de verificación de edad eficientes que protejan sin excluir, garantizando la privacidad de NNA.</div></div>
+    <div class="pillar-cell"><div class="pillar-num">PRINCIPIO 07</div><div class="pillar-title">Inclusión y perspectiva de género</div><div class="pillar-body">Las mujeres y poblaciones de género diverso enfrentan riesgos específicos en línea. creceDigital garantiza su protección y participación igualitaria.</div></div>
+  </div>
+
+  <div class="pull-quote">
+    <p>"La prohibición del acceso a redes sociales basada únicamente en la edad puede resultar arbitraria, no garantiza mayor protección y puede excluir a niñas, niños y adolescentes de espacios digitales seguros diseñados para el ejercicio de sus derechos."</p>
+    <cite>— Alineado con la posición de Save the Children España, 2024</cite>
+  </div>
+
+  <!-- ── VISIÓN Y PROPÓSITO ── -->
+  <div class="section-eyebrow" style="margin-top:44px;">Visión y propósito</div>
+  <br>
+
+  <div style="
+    background: linear-gradient(135deg, var(--ink-mid) 0%, rgba(46,128,216,0.07) 100%);
+    border: 1px solid var(--border-mid);
+    border-radius: 18px;
+    padding: 40px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  ">
+    <!-- Decorativo -->
+    <div style="
+      position:absolute; top:-10px; right:24px;
+      font-size:100px; font-family:'Syne',sans-serif; font-weight:800;
+      color:rgba(90,170,245,0.05); line-height:1; pointer-events:none;
+    ">◎</div>
+
+    <p style="font-size:16px; font-weight:300; color:var(--white); line-height:1.85; margin-bottom:24px; position:relative;">
+      creceDigital trabaja para que el entorno digital sea un espacio <strong style="color:var(--b5); font-weight:600;">más positivo y constructivo para las futuras generaciones</strong>, promoviendo la colaboración entre padres, educadores, instituciones, plataformas tecnológicas y la industria en general, para fomentar prácticas seguras y responsables en el uso de la tecnología.
+    </p>
+
+    <p style="font-size:16px; font-weight:300; color:var(--white); line-height:1.85; margin-bottom:24px; position:relative;">
+      Somos el espacio que <strong style="color:var(--b5); font-weight:600;">aglutina esfuerzos</strong> y actúa como centro de referencia para que la protección de NNA sea igual dentro y fuera del entorno digital — sin dobles estándares, sin brechas y sin zonas grises.
+    </p>
+
+    <!-- Visión en destacado -->
+    <div style="
+      background: rgba(24,95,165,0.12);
+      border-left: 3px solid var(--b4);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      position: relative;
+    ">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--b4); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:10px;">Nuestra visión</div>
+      <p style="font-size:15.5px; font-style:italic; color:var(--b6); line-height:1.8; font-weight:300;">
+        "Soñamos que los NNA puedan usar internet de manera segura, aprovechando sus ventajas, conscientes de los riesgos y con un ecosistema de apoyo efectivo."
+      </p>
+    </div>
+  </div>
+
+  <!-- Tres pilares de propósito -->
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:8px;">
+    <div style="background:var(--ink-soft); border:1px solid var(--border); border-top:2px solid var(--b3); border-radius:12px; padding:20px;">
+      <div style="font-size:22px; margin-bottom:10px;">🤝</div>
+      <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:13.5px; margin-bottom:7px;">Colaboración multisectorial</div>
+      <div style="font-size:12.5px; color:var(--b6); line-height:1.6;">Reunimos en un mismo espacio a padres, educadores, plataformas, instituciones e industria para actuar de forma coordinada y con un propósito común.</div>
+    </div>
+    <div style="background:var(--ink-soft); border:1px solid var(--border); border-top:2px solid var(--b4); border-radius:12px; padding:20px;">
+      <div style="font-size:22px; margin-bottom:10px;">⚖️</div>
+      <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:13.5px; margin-bottom:7px;">Centro de referencia regional</div>
+      <div style="font-size:12.5px; color:var(--b6); line-height:1.6;">Ser la instancia que establece estándares, comparte evidencia y orienta políticas públicas para que la protección de NNA sea efectiva, consistente y medible en toda ALC.</div>
+    </div>
+    <div style="background:var(--ink-soft); border:1px solid var(--border); border-top:2px solid var(--b5); border-radius:12px; padding:20px;">
+      <div style="font-size:22px; margin-bottom:10px;">🌐</div>
+      <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:13.5px; margin-bottom:7px;">Protección sin fronteras</div>
+      <div style="font-size:12.5px; color:var(--b6); line-height:1.6;">La protección de NNA debe ser la misma dentro y fuera del entorno digital. creceDigital trabaja para eliminar los dobles estándares que dejan a las infancias desprotegidas en línea.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 2. CONTRA LA CULTURA DEL MIEDO ══ -->
+<div class="section" id="tab-miedo">
+  <div class="section-eyebrow">02 · Posición de la alianza</div>
+  <h2 class="section-title">No a la cultura<br>del miedo digital</h2>
+  <p class="section-lead">
+    La cultura del miedo frente al mundo digital no protege a nadie. Al contrario: paraliza a las familias, limita a los educadores, sobrecarga a las instituciones y termina dejando a NNA sin el acompañamiento que necesitan para navegar internet de forma segura.
+  </p>
+
+  <div class="fear-block">
+    <div class="fear-block-title">¿De dónde viene la cultura del miedo?</div>
+    <p class="fear-block-text">
+      El miedo no surge de internet en sí mismo — surge de la <strong>brecha de capacidades</strong> entre lo que el mundo digital exige y lo que padres, educadores, cuidadores e instituciones saben hacer con él. Cuando un adulto no tiene herramientas para acompañar a un niño en línea, el miedo reemplaza al criterio. Cuando una institución no tiene capacidades para prevenir la violencia digital, la prohibición reemplaza a la acción efectiva. <strong>creceDigital propone llenar esa brecha con formación, no con muros.</strong>
+    </p>
+    <div class="fear-sources">
+      <div class="fear-source">
+        <div class="fear-source-icon">👨‍👩‍👧</div>
+        <div class="fear-source-title">Padres, madres y cuidadores</div>
+        <div class="fear-source-body">La falta de habilidades digitales en los adultos del hogar genera reacciones de miedo y control que impiden un acompañamiento informado y efectivo. La respuesta es formación parental accesible y práctica.</div>
+      </div>
+      <div class="fear-source">
+        <div class="fear-source-icon">🏫</div>
+        <div class="fear-source-title">Educadores y comunidades escolares</div>
+        <div class="fear-source-body">Los docentes enfrentan el uso de tecnología en el aula sin suficiente formación en mediación digital, ciudadanía en línea o gestión de conflictos digitales. Sin herramientas, reaccionan con prohibición.</div>
+      </div>
+      <div class="fear-source">
+        <div class="fear-source-icon">🏛️</div>
+        <div class="fear-source-title">Estado e instituciones</div>
+        <div class="fear-source-body">La falta de capacidades gubernamentales efectivas para prevenir y responder ante la violencia digital lleva a soluciones de fuerza bruta — bloqueos y prohibiciones — en lugar de políticas basadas en evidencia.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-eyebrow">Lo que propone creceDigital en lugar del miedo</div>
+  <br>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon ic-b3">🎓</div>
+      <div class="card-title">Formación parental digital</div>
+      <div class="card-body">Programas accesibles y prácticos para que padres, madres y cuidadores desarrollen las habilidades que necesitan para acompañar —no controlar— la vida digital de sus hijos.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon ic-b4">🏫</div>
+      <div class="card-title">Docentes mediadores digitales</div>
+      <div class="card-body">Formación docente continua en ciudadanía digital, mediación en conflictos en línea y alfabetización mediática, integrada en los sistemas de desarrollo profesional docente de la región.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon ic-b5">🛡️</div>
+      <div class="card-title">Capacidades institucionales efectivas</div>
+      <div class="card-body">Apoyo a los gobiernos para desarrollar capacidades reales de prevención y respuesta ante violencia digital: protocolos, rutas de atención, coordinación intersectorial y datos para la toma de decisiones.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon ic-gold">📊</div>
+      <div class="card-title">Información basada en evidencia</div>
+      <div class="card-body">Combatir el miedo con datos: la alianza promueve investigación rigurosa sobre el uso real de internet por parte de NNA en ALC para reemplazar percepciones de pánico con diagnósticos fundados.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon ic-b3">🤝</div>
+      <div class="card-title">Comunidades de práctica</div>
+      <div class="card-body">Redes de padres, docentes y cuidadores que comparten experiencias, estrategias y recursos para acompañar el uso digital de NNA desde el conocimiento y la confianza, no desde el miedo.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon ic-b4">🧒</div>
+      <div class="card-title">NNA como agentes, no solo sujetos</div>
+      <div class="card-body">Los niños, niñas y adolescentes tienen mucho que enseñar. La alianza promueve espacios donde NNA participan activamente en la educación de sus propias familias y comunidades sobre el mundo digital.</div>
+    </div>
+  </div>
+
+  <div class="pull-quote pull-quote-gold">
+    <p>"El miedo sin conocimiento no protege — paraliza. Cuando un adulto no tiene herramientas para acompañar a un niño en línea, la prohibición se convierte en el único recurso disponible. creceDigital existe para ampliar ese repertorio."</p>
+    <cite>— Posición de creceDigital · Alianza por la Autonomía Digital Infantil en ALC</cite>
+  </div>
+</div>
+
+<!-- ══ 3. ¿POR QUÉ? ══ -->
+<div class="section" id="tab-porque">
+  <div class="section-eyebrow">03 · Contexto</div>
+  <h2 class="section-title">El problema que<br>creceDigital resuelve</h2>
+  <p class="section-lead">En América Latina y el Caribe, el debate sobre protección digital de NNA se ha polarizado entre la prohibición total y la permisividad sin criterio. creceDigital existe para ofrecer una tercera vía: educación, acompañamiento, herramientas y corresponsabilidad del ecosistema digital.</p>
+
+  <div class="contrast-box">
+    <div class="contrast-no">
+      <div class="contrast-label">✕ Lo que no funciona</div>
+      <ul class="contrast-list">
+        <li>Prohibiciones generales para menores de 16 años sin verificación eficiente</li>
+        <li>Responsabilizar solo a las familias, ignorando a plataformas y al Estado</li>
+        <li>Reaccionar con miedo y bloqueo ante el desconocimiento digital</li>
+        <li>Regulaciones fragmentadas por país que generan inseguridad jurídica</li>
+        <li>Respuesta lenta ante denuncias de violencia digital contra NNA y mujeres</li>
+        <li>Excluir a adolescentes de espacios donde ejercen ciudadanía y aprenden</li>
+      </ul>
+    </div>
+    <div class="contrast-yes">
+      <div class="contrast-label">✓ Lo que sí funciona</div>
+      <ul class="contrast-list">
+        <li>Educación mediática desde la infancia, integrada al currículo escolar</li>
+        <li>Acompañamiento parental informado — no control basado en el miedo</li>
+        <li>Verificación de edad técnicamente sólida y respetuosa de la privacidad</li>
+        <li>Plataformas con estándares de seguridad por defecto para NNA</li>
+        <li>Protocolo de respuesta rápida ante violencia digital, coordinado entre sectores</li>
+        <li>Autonomía digital progresiva: más libertad a medida que crecen las competencias</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="card-grid">
+    <div class="card"><div class="card-icon ic-gold">⚠️</div><div class="card-title">Cultura del miedo</div><div class="card-body">El pánico ante internet sin herramientas de acción lleva a prohibiciones reactivas que no protegen y que desconectan a NNA del acompañamiento adulto que necesitan.</div></div>
+    <div class="card"><div class="card-icon ic-b5">📊</div><div class="card-title">Brecha de evidencia</div><div class="card-body">Las iniciativas de protección de NNA rara vez se basan en datos reales sobre sus comportamientos digitales en la región. creceDigital genera y difunde esa evidencia.</div></div>
+    <div class="card"><div class="card-icon ic-b3">🤝</div><div class="card-title">Desarticulación sectorial</div><div class="card-body">Plataformas, gobierno, escuelas y familias actúan en silos. creceDigital es el espacio de coordinación que falta para una protección efectiva y sostenida.</div></div>
+    <div class="card"><div class="card-icon ic-b4">⚡</div><div class="card-title">Lentitud ante violencias digitales</div><div class="card-body">Los tiempos de respuesta ante violencia digital contra NNA y mujeres son inadmisiblemente largos. Se necesitan protocolos conjuntos, urgentes y efectivos.</div></div>
+  </div>
+</div>
+
+<!-- ══ 4. PLATAFORMAS ══ -->
+<div class="section" id="tab-plataformas">
+  <div class="section-eyebrow">04 · Propuesta de valor para la industria</div>
+  <h2 class="section-title">¿Por qué a Google, Meta,<br>TikTok o Amazon les importa?</h2>
+  <p class="section-lead">Unirse a creceDigital no es solo una decisión de responsabilidad social. Es una decisión estratégica de largo plazo que protege sus operaciones, fortalece su legitimidad y les permite co-construir el marco regulatorio antes de que llegue impuesto.</p>
+
+  <div class="platform-grid">
+    <div class="platform-card"><div class="platform-card-header"><div class="platform-icon">⚖️</div><div class="platform-card-title">Influencia en la regulación</div></div><div class="platform-card-body">La presión legislativa por prohibir el acceso de menores a redes crece en toda la región. Las plataformas que participan en creceDigital co-construyen estándares razonables basados en evidencia, antes de recibir regulaciones técnicamente inviables o desproporcionadas.</div></div>
+    <div class="platform-card"><div class="platform-card-header"><div class="platform-icon">🌎</div><div class="platform-card-title">Alternativa a la prohibición total</div></div><div class="platform-card-body">La alianza defiende explícitamente que las prohibiciones generales por edad no son la solución. Participar es la forma más eficaz de colocar alternativas reales sobre la mesa: verificación de edad, diseño seguro por defecto, educación digital.</div></div>
+    <div class="platform-card"><div class="platform-card-header"><div class="platform-icon">🏆</div><div class="platform-card-title">Reputación y licencia social</div></div><div class="platform-card-body">Las plataformas que lideran iniciativas genuinas de protección infantil ganan confianza entre padres, educadores y reguladores. creceDigital ofrece una plataforma regional creíble para comunicar ese compromiso con hechos concretos.</div></div>
+    <div class="platform-card"><div class="platform-card-header"><div class="platform-icon">🔬</div><div class="platform-card-title">Acceso a investigación regional</div></div><div class="platform-card-body">creceDigital genera estudios e informes sobre comportamientos digitales de NNA y mujeres en ALC. Los miembros acceden a esta evidencia para mejorar sus herramientas de protección y tomar decisiones de producto más informadas.</div></div>
+    <div class="platform-card"><div class="platform-card-header"><div class="platform-icon">🚀</div><div class="platform-card-title">Certeza jurídica y armonización</div></div><div class="platform-card-body">Operar en 33 países con 33 marcos regulatorios distintos es costoso. creceDigital trabaja por la armonización de estándares regionales de protección digital, reduciendo la fragmentación normativa que afecta las decisiones de inversión.</div></div>
+    <div class="platform-card"><div class="platform-card-header"><div class="platform-icon">💬</div><div class="platform-card-title">Gestión coordinada de denuncias</div></div><div class="platform-card-body">Las plataformas son el primer punto de contacto ante violencia digital. creceDigital ofrece un protocolo conjunto con el Estado y sociedad civil para la gestión rápida y eficaz de denuncias, reduciendo tiempos de respuesta y riesgos legales.</div></div>
+  </div>
+</div>
+
+<!-- ══ 5. ECOSISTEMA ══ -->
+<div class="section" id="tab-ecosistema">
+  <div class="section-eyebrow">05 · Ecosistema de miembros</div>
+  <h2 class="section-title">Quién conforma<br>creceDigital</h2>
+  <p class="section-lead">Una coalición voluntaria donde el compromiso con los principios define la pertenencia — no el origen sectorial ni la geografía.</p>
+
+  <div class="ecosystem-sectors">
+    <div class="sector-card"><div class="sector-header"><div class="sector-emoji">🌐</div><div class="sector-title">Grandes plataformas tecnológicas</div></div><ul class="sector-orgs"><li>Google / YouTube</li><li>Meta (Facebook, Instagram, WhatsApp)</li><li>TikTok / ByteDance</li><li>Amazon (Prime Video, AWS)</li><li>Spotify, X, Snap, Discord</li><li>Plataformas regionales ALC</li></ul></div>
+    <div class="sector-card"><div class="sector-header"><div class="sector-emoji">🏛️</div><div class="sector-title">Entidades gubernamentales</div></div><ul class="sector-orgs"><li>MinTIC Colombia</li><li>ICBF</li><li>Ministerio de Educación Nacional</li><li>Comisión de Regulación de Comunicaciones</li><li>Entidades TIC equivalentes en ALC</li><li>Defensorías del Pueblo</li></ul></div>
+    <div class="sector-card"><div class="sector-header"><div class="sector-emoji">🏫</div><div class="sector-title">Academia y educación</div></div><ul class="sector-orgs"><li>Universidad Javeriana</li><li>Universidad de los Andes</li><li>UNAL, EAFIT, UTADEO</li><li>Colegios y redes educativas</li><li>Universidades públicas ALC</li><li>Centros de investigación en infancia digital</li></ul></div>
+    <div class="sector-card"><div class="sector-header"><div class="sector-emoji">🤝</div><div class="sector-title">Sociedad civil y ONG</div></div><ul class="sector-orgs"><li>Karisma Foundation</li><li>Red PaPaz</li><li>Save the Children Colombia</li><li>UNICEF, OPS, OEI</li><li>Organizaciones de derechos digitales</li><li>Redes feministas y de género</li></ul></div>
+    <div class="sector-card"><div class="sector-header"><div class="sector-emoji">📡</div><div class="sector-title">Operadores y proveedores</div></div><ul class="sector-orgs"><li>Claro, Movistar, Tigo</li><li>ETB, UNE, Wom</li><li>Proveedores de internet regionales</li><li>Empresas de ciberseguridad</li><li>Desarrolladores de apps educativas</li></ul></div>
+    <div class="sector-card"><div class="sector-header"><div class="sector-emoji">👧</div><div class="sector-title">NNA y juventud organizada</div></div><ul class="sector-orgs"><li>Consejos de juventud municipales</li><li>Colectivos estudiantiles digitales</li><li>Redes de jóvenes periodistas</li><li>Grupos de NNA activistas digitales</li><li>Consejo Vinculante de Juventud e Infancia</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ 6. MEMBRESÍA ══ -->
+<div class="section" id="tab-membresia">
+  <div class="section-eyebrow">06 · Modelo de membresía</div>
+  <h2 class="section-title">Cómo funciona<br>la adhesión</h2>
+  <p class="section-lead">creceDigital es una fundación sin ánimo de lucro de carácter voluntario, abierta a cualquier organización comprometida con sus principios. Su modelo de membresía garantiza que ningún sector condicione la misión de la fundación: proteger los derechos de NNA en los entornos digitales.</p>
+
+  <div class="tiers-grid">
+    <div class="tier-card tier-1"><div class="tier-badge badge-founding">Fundador</div><div class="tier-name">Miembro Fundador</div><div class="tier-desc">Organizaciones que constituyen creceDigital desde su inicio y lideran su dirección estratégica con los mayores derechos de gobernanza.</div><ul class="tier-benefits"><li>Voto en la Asamblea General</li><li>Participación en el Consejo Directivo</li><li>Nombramiento en comités técnicos</li><li>Reconocimiento fundador permanente</li><li>Acceso prioritario a investigación</li></ul></div>
+    <div class="tier-card tier-2"><div class="tier-badge badge-full">Pleno</div><div class="tier-name">Miembro Pleno</div><div class="tier-desc">Organizaciones que se adhieren formalmente, suscribiendo la carta de principios y asumiendo compromisos verificables.</div><ul class="tier-benefits"><li>Voto en la Asamblea General</li><li>Participación en comités técnicos</li><li>Acceso completo a recursos y redes</li><li>Sello de membresía activa</li></ul></div>
+    <div class="tier-card tier-3"><div class="tier-badge badge-associate">Asociado</div><div class="tier-name">Miembro Asociado</div><div class="tier-desc">Organizaciones que apoyan los principios y contribuyen en áreas específicas sin asumir todos los compromisos superiores.</div><ul class="tier-benefits"><li>Voz pero no voto en asambleas</li><li>Participación en grupos de trabajo</li><li>Acceso a materiales y formaciones</li><li>Visibilidad en la red regional</li></ul></div>
+    <div class="tier-card tier-4"><div class="tier-badge badge-observer">Observador</div><div class="tier-name">Observador</div><div class="tier-desc">Entidades que siguen y validan el trabajo de creceDigital sin compromisos formales.</div><ul class="tier-benefits"><li>Acceso a sesiones abiertas</li><li>Recepción de informes y publicaciones</li><li>Mención como observador validador</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ 7. GOBERNANZA ══ -->
+<div class="section" id="tab-gobernanza">
+  <div class="section-eyebrow">07 · Gobernanza</div>
+  <h2 class="section-title">Estructura de<br>decisión y participación</h2>
+  <p class="section-lead">creceDigital se rige por un modelo paritario que garantiza que ningún sector tenga control unilateral sobre la misión de la fundación. Las voces de NNA son vinculantes, no consultivas, y la protección de sus derechos en entornos digitales prevalece sobre cualquier interés sectorial o comercial.</p>
+
+  <div class="gov-flow">
+    <div class="gov-row"><div class="gov-label">Máxima autoridad</div><div class="gov-block"><div class="gov-block-title">Asamblea General</div><div class="gov-block-body">Reúne a todos los miembros con derecho a voto. Aprueba la estrategia, el presupuesto y las grandes decisiones de la alianza. Se convoca anualmente y puede sesionar de forma virtual.</div></div></div>
+    <div class="gov-row"><div class="gov-label">Dirección ejecutiva</div><div class="gov-block"><div class="gov-block-title">Consejo Directivo Paritario</div><div class="gov-block-body">Representantes de los cuatro sectores (plataformas, sector público, academia/sociedad civil, juventud organizada) en igual proporción. Ningún sector domina las decisiones cotidianas.</div></div></div>
+    <div class="gov-row"><div class="gov-label">Voz vinculante NNA</div><div class="gov-block"><div class="gov-block-title">Consejo de Juventud e Infancia ★</div><div class="gov-block-body">Órgano con poder de veto en decisiones que afecten directamente los derechos de NNA. Sus resoluciones son vinculantes para el Consejo Directivo. Incluye representantes de 8–12 países de ALC.</div></div></div>
+    <div class="gov-row"><div class="gov-label">Transversal</div><div class="gov-block"><div class="gov-block-title">Comité de Género</div><div class="gov-block-body">Opera de forma transversal a todos los órganos. Asegura que la perspectiva de género y la protección de mujeres y poblaciones diversas esté integrada en todas las iniciativas.</div></div></div>
+    <div class="gov-row"><div class="gov-label">Operación</div><div class="gov-block"><div class="gov-block-title">Secretaría Técnica</div><div class="gov-block-body">Coordina la ejecución del plan de trabajo, gestiona las comunicaciones, produce informes de seguimiento y apoya la articulación entre comités temáticos.</div></div></div>
+    <div class="gov-row"><div class="gov-label">Control independiente</div><div class="gov-block"><div class="gov-block-title">Panel de Revisión Independiente</div><div class="gov-block-body">Expertos externos que evalúan anualmente el desempeño de los miembros y la alianza. Sus informes son públicos.</div></div></div>
+  </div>
+</div>
+
+<!-- ══ 8. HOJA DE RUTA ══ -->
+<div class="section" id="tab-hoja">
+  <div class="section-eyebrow">08 · Hoja de ruta</div>
+  <h2 class="section-title">Plan de trabajo<br>2025 – 2030</h2>
+  <p class="section-lead">creceDigital se construye en cinco fases que van desde la constitución formal hasta el posicionamiento como referente regional de gobernanza digital inclusiva en ALC.</p>
+
+  <div class="roadmap-timeline">
+    <div class="timeline-item ti-1"><div class="timeline-dot"></div><div class="timeline-year">FASE 1 · 2025</div><div class="timeline-title">Fundación y legitimación</div><div class="timeline-body">Constitución jurídica como organización sin ánimo de lucro. Reclutamiento de miembros fundadores de los cuatro sectores. Instalación del Consejo Directivo Paritario y del Consejo de Juventud e Infancia. Publicación de la Carta de Principios y lanzamiento público regional.</div><div class="timeline-tags"><span class="timeline-tag">Constitución legal</span><span class="timeline-tag">Miembros fundadores</span><span class="timeline-tag">Carta de principios</span><span class="timeline-tag">Lanzamiento regional</span></div></div>
+    <div class="timeline-item ti-2"><div class="timeline-dot"></div><div class="timeline-year">FASE 2 · 2026</div><div class="timeline-title">Construcción de capacidades y primeros compromisos</div><div class="timeline-body">Activación del protocolo de respuesta rápida ante denuncias de violencia digital en 5 países piloto. Primer informe regional sobre comportamientos digitales de NNA. Lanzamiento del programa de formación parental y docente en alfabetización digital.</div><div class="timeline-tags"><span class="timeline-tag">Protocolo de denuncias</span><span class="timeline-tag">Informe regional</span><span class="timeline-tag">Formación parental</span><span class="timeline-tag">Formación docente</span></div></div>
+    <div class="timeline-item ti-3"><div class="timeline-dot"></div><div class="timeline-year">FASE 3 · 2027–2028</div><div class="timeline-title">Escala y posicionamiento normativo</div><div class="timeline-body">Expansión a los 33 países de ALC. Propuestas de estándares regionales ante CELAC, OEA e ILCE. Activación del sello de certificación de plataformas responsables. Segunda ronda de informes de cumplimiento evaluada por el Panel Independiente.</div><div class="timeline-tags"><span class="timeline-tag">Expansión LAC</span><span class="timeline-tag">Estándares regionales</span><span class="timeline-tag">Sello de certificación</span></div></div>
+    <div class="timeline-item ti-4"><div class="timeline-dot"></div><div class="timeline-year">FASE 4 · 2029</div><div class="timeline-title">Evaluación y ajuste estratégico</div><div class="timeline-body">Evaluación externa de impacto. Revisión de la Carta de Principios con participación protagónica de NNA. Publicación del primer Índice de Autonomía Digital Progresiva para la región.</div><div class="timeline-tags"><span class="timeline-tag">Evaluación de impacto</span><span class="timeline-tag">Índice regional</span><span class="timeline-tag">Revisión participativa</span></div></div>
+    <div class="timeline-item ti-5"><div class="timeline-dot"></div><div class="timeline-year">FASE 5 · 2030</div><div class="timeline-title">creceDigital como referente global</div><div class="timeline-body">Posicionamiento de creceDigital como modelo de gobernanza digital multisectorial reconocido internacionalmente. Vinculación con IGF, UNICEF e ITU. Transferencia del modelo a otras regiones.</div><div class="timeline-tags"><span class="timeline-tag">Referente global</span><span class="timeline-tag">IGF · UNICEF · ITU</span><span class="timeline-tag">Transferencia del modelo</span></div></div>
+  </div>
+</div>
+
+<!-- ── FOOTER ─────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="25 130 890 255" height="44" style="width:auto;">
+      <defs>
+        <radialGradient id="fn" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#378ADD"/>
+          <stop offset="100%" stop-color="#0C447C"/>
+        </radialGradient>
+      </defs>
+      <!-- Ondas -->
+      <path d="M30,228 Q148,138 266,228" fill="none" stroke="#B5D4F4" stroke-width="1.5" stroke-linecap="round" opacity="0.25"/>
+      <path d="M52,250 Q148,163 244,250" fill="none" stroke="#85B7EB" stroke-width="2.2" stroke-linecap="round" opacity="0.35"/>
+      <path d="M78,274 Q148,188 218,274" fill="none" stroke="#EF9F27" stroke-width="3"   stroke-linecap="round" opacity="0.55"/>
+      <path d="M106,298 Q148,218 190,298" fill="none" stroke="#B5D4F4" stroke-width="4"  stroke-linecap="round" opacity="0.6"/>
+      <!-- Núcleo -->
+      <circle cx="148" cy="308" r="40" fill="#0C447C" stroke="#378ADD" stroke-width="1" stroke-opacity="0.4"/>
+      <circle cx="148" cy="308" r="29" fill="url(#fn)"/>
+      <circle cx="148" cy="308" r="18" fill="#85B7EB"/>
+      <circle cx="148" cy="308" r="8"  fill="#031428"/>
+      <circle cx="148" cy="300" r="5"  fill="#185FA5"/>
+      <line x1="148" y1="305" x2="148" y2="318" stroke="#185FA5" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="148" y1="310" x2="140" y2="304" stroke="#185FA5" stroke-width="2"   stroke-linecap="round"/>
+      <line x1="148" y1="310" x2="156" y2="304" stroke="#185FA5" stroke-width="2"   stroke-linecap="round"/>
+      <!-- Satélites -->
+      <circle cx="108" cy="288" r="12" fill="#EF9F27"/><circle cx="108" cy="288" r="6" fill="#042C53"/>
+      <circle cx="188" cy="288" r="12" fill="#EF9F27"/><circle cx="188" cy="288" r="6" fill="#042C53"/>
+      <line x1="148" y1="308" x2="108" y2="288" stroke="#EF9F27" stroke-width="1.6" opacity="0.55"/>
+      <line x1="148" y1="308" x2="188" y2="288" stroke="#EF9F27" stroke-width="1.6" opacity="0.55"/>
+      <!-- Crece escalonado -->
+      <text x="310" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="38" fill="#85B7EB">C</text>
+      <text x="337" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="50" fill="#85B7EB">r</text>
+      <text x="364" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="62" fill="#B5D4F4">e</text>
+      <text x="404" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="74" fill="#B5D4F4">c</text>
+      <text x="451" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="86" fill="white">e</text>
+      <!-- DIGITAL -->
+      <text x="503" y="330" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="900" font-size="86" fill="#85B7EB">DIGITAL</text>
+      <!-- Tagline -->
+      <line x1="310" y1="348" x2="905" y2="348" stroke="#0C447C" stroke-width="0.8"/>
+      <text x="312" y="368" font-family="'Helvetica Neue',Arial,sans-serif" font-size="13" fill="#85B7EB" font-style="italic" opacity="0.7">Alianza por la Autonomía Digital Infantil en Latinoamérica</text>
+    </svg>
+  </div>
+  <div class="footer-text">Fundación sin ánimo de lucro · ALC 2025–2030 · Por los derechos de NNA en entornos digitales seguros</div>
+</footer>
+
+<script>
+  function switchTab(name) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    const tabMap = ['manifiesto','miedo','porque','plataformas','ecosistema','membresia','gobernanza','hoja'];
+    document.querySelectorAll('.nav-tab').forEach((t, i) => {
+      t.classList.toggle('active', tabMap[i] === name);
+    });
+    document.getElementById('mainNav').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+</script>
+</body>
+</html>
